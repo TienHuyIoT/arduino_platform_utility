@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
-#include "ticker.h"
+#include "flatform_ticker.h"
 #include "frame.h"
 
 typedef enum {

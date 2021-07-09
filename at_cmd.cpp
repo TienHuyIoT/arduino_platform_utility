@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdio.h>
-#include "ticker.h"
+#include "flatform_ticker.h"
 #include "Tools.h"
 #include "at_cmd.h"
 

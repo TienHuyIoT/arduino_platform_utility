@@ -1,4 +1,4 @@
-#include "ticker.h"
+#include "flatform_ticker.h"
 #include "frame.h"
 #include "frame_com.h"
 #include "if_frame_app.h"
@@ -6,13 +6,19 @@
 #include "input_service.h"
 #include "at_cmd.h"
 #include "at_cmd_process.h"
+#include "console_dbg.h"
 
-/* Private define ------------------------------------------------------------*/
-#define MAIN_DBG_PORT Serial
-#define MAIN_DBG_PRINTF(f_, ...)               MAIN_DBG_PORT.printf_P(PSTR(f_), ##__VA_ARGS__)
+/* Private includes ----------------------------------------------------------*/
 
+/* Private typedef -----------------------------------------------------------*/
 #define EVSE_FC_RX_BUFF_SIZE    FRAME_SIZE_MAX
 #define EVSE_FC_TX_BUFF_SIZE    FRAME_SIZE_MAX
+
+/* Private define ------------------------------------------------------------*/
+
+/* Private macro -------------------------------------------------------------*/
+#define MAIN_TAG_CONSOLE(...) CONSOLE_TAG_LOGI("[MAIN]", __VA_ARGS__)
+#define MAIN_CONSOLE(...) CONSOLE_LOGI(__VA_ARGS__)
 
 /* Private variables ---------------------------------------------------------*/
 const char* const button_serviceid[] PROGMEM = {
@@ -54,8 +60,8 @@ void button_sample_rate_cb(uint32_t remain) {
 }
 
 void button_service_cb(service_io_input_handle_t *service, uint8_t evt) {
-  MAIN_DBG_PRINTF("\r\nButton service: %s", FPSTR(button_serviceid[evt]));
-  MAIN_DBG_PRINTF("\r\n");
+  MAIN_TAG_CONSOLE("Button service: %s", FPSTR(button_serviceid[evt]));
+  MAIN_CONSOLE("\r\n");
   if (service == &button_service) {
     switch (evt) {
       case IO_INPUT_FALLING:
@@ -92,18 +98,18 @@ void jig_setup(uint8_t jig)
   jig_process_enable = jig;
   if (jig)
   {
-    MAIN_DBG_PRINTF("\r\nJIG Enable");
+    MAIN_TAG_CONSOLE("JIG Enable");
   }
   else
   {
-    MAIN_DBG_PRINTF("\r\nJIG Disable");
+    MAIN_TAG_CONSOLE("JIG Disable");
   }
 
-  MAIN_DBG_PRINTF("\r\n");
+  MAIN_TAG_CONSOLE("");
 }
 
 void setup() {
-  Serial.begin(115200);
+  CONSOLE_PORT.begin(115200);
   pinMode(0, INPUT_PULLUP);
   /* Register serial interface with rfid */
   frame_com_if_uart.instance = FRAME_UART_INTERFACE;

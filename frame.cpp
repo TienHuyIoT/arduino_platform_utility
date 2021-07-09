@@ -2,9 +2,9 @@
 #include "frame.h"
 
 #if (defined FRAME_DEBUG_ENABLE) && (FRAME_DEBUG_ENABLE == 1)
-#define FRAME_DBG_PORT Serial
-#define FRAME_PRINTF(f_, ...)               FRAME_DBG_PORT.printf_P(PSTR(f_), ##__VA_ARGS__)
-#define FRAME_TAG_PRINTF(f_, ...)           FRAME_DBG_PORT.printf_P(PSTR("\r\n[FRAME] " f_), ##__VA_ARGS__)
+#include "console_dbg.h"
+#define FRAME_TAG_PRINTF(...) CONSOLE_TAG_LOGI("[FRAME]", __VA_ARGS__)
+#define FRAME_PRINTF(...) CONSOLE_LOGI(__VA_ARGS__)
 #else
 #define FRAME_PRINTF(f_, ...)
 #define FRAME_TAG_PRINTF(f_, ...)

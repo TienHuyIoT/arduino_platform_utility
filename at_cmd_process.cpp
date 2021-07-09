@@ -5,9 +5,9 @@
 #include "at_cmd_process.h"
 
 #if (defined AT_CMD_PROCESS_DEBUG) && (AT_CMD_PROCESS_DEBUG == 1)
-#define APP_AT_PORT Serial
-#define APP_AT_PRINT(f_, ...)               APP_AT_PORT.printf_P(PSTR(f_), ##__VA_ARGS__)
-#define APP_AT_TAG_PRINT(f_, ...)           APP_AT_PORT.printf_P(PSTR("\r\n[APP AT] " f_), ##__VA_ARGS__)
+#include "console_dbg.h"
+#define APP_AT_TAG_PRINT(...) CONSOLE_TAG_LOGI("[APP AT]", __VA_ARGS__)
+#define APP_AT_PRINT(...) CONSOLE_LOGI(__VA_ARGS__)
 #else
 #define APP_AT_PRINT(f_, ...)
 #define APP_AT_DBG_PRINT(f_, ...)
@@ -33,10 +33,10 @@ static void at_setup_jig(at_funcation_t* at, char *p_para);
  *         ,        , AT+<CMD>=?\r, AT+<CMD>?\r, AT+<CMD>=..\r, AT+<CMD>\r */
 at_funcation_t at_fun_handle[]={
   {NULL     , 0, NULL, NULL         , NULL        , at_exe_cmd_null},
-  {"+SWV"   , 4, NULL, at_query_swv , NULL        , NULL},
-  {"+HWV"   , 4, NULL, at_query_hwv , NULL        , NULL},
-  {"+SN"    , 3, NULL, at_query_sn  , NULL        , NULL},
-  {"+JIG"   , 4, NULL, at_query_jig , at_setup_jig, NULL}
+  {(char*)"+SWV"   , 4, NULL, at_query_swv , NULL        , NULL},
+  {(char*)"+HWV"   , 4, NULL, at_query_hwv , NULL        , NULL},
+  {(char*)"+SN"    , 3, NULL, at_query_sn  , NULL        , NULL},
+  {(char*)"+JIG"   , 4, NULL, at_query_jig , at_setup_jig, NULL}
 };
 
 const size_t AT_CMD_HANDLE_NUM = (sizeof(at_fun_handle) / sizeof(at_fun_handle[0]));

@@ -1,13 +1,13 @@
 #include <arduino.h>
-#include "ticker.h"
+#include "flatform_ticker.h"
 #include "frame.h"
 #include "frame_com.h"
 #include "if_frame_app.h"
 
 #if (defined IF_COM_DEBUG_ENABLE) && (IF_COM_DEBUG_ENABLE == 1)
-#define EVSE_DBG_PORT Serial
-#define EVSE_PRINTF(f_, ...)               EVSE_DBG_PORT.printf_P(PSTR(f_), ##__VA_ARGS__)
-#define EVSE_TAG_PRINTF(f_, ...)           EVSE_DBG_PORT.printf_P(PSTR("\r\n[EVSE] " f_), ##__VA_ARGS__)
+#include "console_dbg.h"
+#define EVSE_TAG_PRINTF(...) CONSOLE_TAG_LOGI("[EVSE]", __VA_ARGS__)
+#define EVSE_PRINTF(...) CONSOLE_LOGI(__VA_ARGS__)
 #else
 #define EVSE_PRINTF(f_, ...)
 #define EVSE_TAG_PRINTF(f_, ...)

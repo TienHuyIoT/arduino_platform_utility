@@ -183,3 +183,16 @@ uint8_t crc_xor(const uint8_t *buff, uint32_t lenght)
   }
   return xor;
 }
+
+/* Brief: swap ddmmyy --> 20yymmdd
+ * 
+ */
+uint32_t swap_date(uint32_t date_in)
+{
+  uint32_t dd,mm,yy, date_out;
+  yy = date_in % 100;
+  mm = (date_in / 100) % 100;
+  dd = date_in / 10000;
+  date_out = 20000000 + (yy * 10000) + (mm * 100) + dd;
+  return date_out;
+}

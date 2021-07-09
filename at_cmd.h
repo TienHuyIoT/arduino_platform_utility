@@ -6,7 +6,7 @@
 #endif
 
 #include <stdint.h>
-#include "ticker.h"
+#include "flatform_ticker.h"
 
 #define AT_CMD_DEBUG    1
 

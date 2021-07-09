@@ -7,7 +7,7 @@
 
 #include <stdint.h>
 #include "io_input.h"
-#include "ticker.h"
+#include "flatform_ticker.h"
 
 #define INPUT_SINGLE_TIME_TRIGGER     400   /* ms */
 #define INPUT_HOLD_TIME_TRIGGER       1000  /* ms */

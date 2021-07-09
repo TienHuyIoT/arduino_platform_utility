@@ -1,11 +1,11 @@
 #include <arduino.h>
 #include "frame_com.h"
-#include "ticker.h"
+#include "flatform_ticker.h"
 
 #if (defined FRAME_COM_DEBUG_ENABLE) && (FRAME_COM_DEBUG_ENABLE == 1)
-#define FC_DBG_PORT Serial
-#define FC_DBG_PRINTF(f_, ...)               FC_DBG_PORT.printf_P(PSTR(f_), ##__VA_ARGS__)
-#define FC_DBG_TAG_PRINTF(f_, ...)           FC_DBG_PORT.printf_P(PSTR("\r\n[FRAME_COM] " f_), ##__VA_ARGS__)
+#include "console_dbg.h"
+#define FC_DBG_TAG_PRINTF(...) CONSOLE_TAG_LOGI("[FRAME_COM]", __VA_ARGS__)
+#define FC_DBG_PRINTF(...) CONSOLE_LOGI(__VA_ARGS__)
 #else
 #define FC_DBG_PRINTF(f_, ...)
 #define FC_DBG_TAG_PRINTF(f_, ...)

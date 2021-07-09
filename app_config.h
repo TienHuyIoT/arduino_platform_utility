@@ -13,10 +13,6 @@
 #define SERIAL_NUMBER_LENGTH_MAX    32
 #endif
 
-// </h>
-
-// <h> Hardware Version
-
 //==========================================================
 // <o> HW_VERSION_STRING
 

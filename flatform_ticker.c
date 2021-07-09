@@ -1,4 +1,6 @@
-#include "ticker.h"
+#include "flatform_ticker.h"
+
+extern unsigned long millis();
 
 static ticker_function_handle_t* ticker_function_handle[TICKER_FUNCTION_HANDLE_MAX];
 static void ticker_function_loop(ticker_function_handle_t *fp_ticker);
