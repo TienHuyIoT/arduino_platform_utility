@@ -9,7 +9,7 @@
 int vspfunc(size_t (*write_cb)(uint8_t*, size_t), const char *format, ...)
 {
   va_list args;
-  char v_buff[V_BUFFER];
+  char* v_buff = (char*)malloc(V_BUFFER);
   size_t lenght;
 
   va_start(args, format);
@@ -20,7 +20,7 @@ int vspfunc(size_t (*write_cb)(uint8_t*, size_t), const char *format, ...)
   {
     write_cb((uint8_t*)v_buff, lenght);
   }
-
+  free(v_buff);
   return lenght;
 }
 

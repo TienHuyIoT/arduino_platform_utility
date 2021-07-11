@@ -7,9 +7,9 @@
 #include "at_cmd.h"
 
 #if (defined AT_CMD_DEBUG) && (AT_CMD_DEBUG == 1)
-#define AT_DBG_PORT Serial
-#define AT_PRINT(f_, ...)               AT_DBG_PORT.printf_P(PSTR(f_), ##__VA_ARGS__)
-#define AT_TAG_PRINT(f_, ...)           AT_DBG_PORT.printf_P(PSTR("\r\n[AT] " f_), ##__VA_ARGS__)
+#include "console_dbg.h"
+#define AT_TAG_PRINT(...) CONSOLE_TAG_LOGI("[AT]", __VA_ARGS__)
+#define AT_PRINT(...) CONSOLE_LOGI(__VA_ARGS__)
 #else
 #define AT_PRINT(f_, ...)
 #define AT_TAG_PRINT(f_, ...)
